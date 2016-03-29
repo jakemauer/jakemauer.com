@@ -43,5 +43,16 @@ module.exports = function(environment) {
 
   }
 
+  
+  ENV.contentSecurityPolicy = {
+    'default-src': "'none'",
+    'script-src': "'self' 'unsafe-eval' 'unsafe-inline' http://*:35729 https://d2wy8f7a9ursnm.cloudfront.net/ heapanalytics.com https://js.intercomcdn.com/ https://widget.intercom.io *.segment.io *.mixpanel.com http://google-analytics.com",
+    'font-src': "'self' data: http://fonts.gstatic.com https://fonts.gstatic.com", // Allow fonts to be loaded from http://fonts.gstatic.com
+    'connect-src': "'self' notify.bugsnag.com https://gist.githubusercontent.com wss://*.intercom.io *.intercom.io https://api.mixpanel.com cdn.heapanalytics.com *.segment.io *.mixpanel.com http://google-analytics.com"  + ENV.APIRoot, // Allow data (ajax/websocket) from api.mixpanel.com and custom-api.local
+    'img-src': "'self' data: *.s3.amazonaws.com *.dropboxusercontent.com *.dropbox.com https://notify.bugsnag.com *.intercomcdn.com heapanalytics.com *.google-analytics.com",
+    'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com https://fonts.googleapis.com", // Allow inline styles and loaded CSS from http://fonts.googleapis.com
+    'media-src': "'self'  *.s3.amazonaws.com  *.intercomcdn.com"
+  };
+
   return ENV;
 };
