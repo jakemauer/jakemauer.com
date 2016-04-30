@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+read -r -p "What is the name of the project? " name
+
+touch ./src/data/project.json
+echo "{ \"title\": \"$(tr '[:lower:]' '[:upper:]' <<< ${name:0:1})${name:1}\" }" >> ./src/data/project.json
+
+touch .env
+echo -e "PROJECT_NAME=$name\nAWS_KEY=<AWS_KEY>\nAWS_SECRET=<AWS_SECRET>\nS3_BUCKET=<S3_BUCKET>\nAWS_REGION=us-east-1" >> .env
+echo "Don't forget to fill out the .env file with AWS credentials prior to deploying"
+
+read -r -p "Set up git repo? [y/n] " response
+if [[ $response =~ ^(yes|y)$ ]]; then
+  # Remove boilerplate history
+  rm -rf .git
+  rm README.md
+
+  git init
+  git add .
+  git commit -m 'Initial commit'
+fi
+
+# Set up NPM dependencies
+echo "Installing dependencies..."
+npm install

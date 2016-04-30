@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Export the environment variables & deploy
+env $(cat .env | xargs) node_modules/.bin/gulp deploy
