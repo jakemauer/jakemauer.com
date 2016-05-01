@@ -118,7 +118,7 @@ gulp.task('build:css', () => {
 
 // Copy over images
 gulp.task('build:images', () => {
-  return gulp.src('src/assets/images/*')
+  return gulp.src('src/assets/images/**/*')
     .pipe(gulp.dest('build/images'));
 });
 
