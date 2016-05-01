@@ -10,13 +10,13 @@ html
 *:after
   box-sizing inherit
 
-.container
-  &:active
-    .background
-      opacity: 1
-    .outlines
-      path
-        stroke: #fff
+// .container
+//   &:active
+//     .background
+//       opacity: 1
+//     .outlines
+//       path
+//         stroke: #fff
 
 .background
   height: 100vh
@@ -27,9 +27,21 @@ html
   background-position: center
   margin: 0 auto
   opacity: 0
-  transition: opacity 1s
+  transition: opacity 2s
 
+.start-animation
+  .background
+    opacity: 1
+    transition-delay: 3.5s
+  .outlines
+    path
+      stroke-dasharray: 1
+      transition: stroke-dasharray 4s ease, 
+                  stroke-arrayoffset 4s ease
 
+img.svg 
+  display: none
+      
 .outlines
   height: 100vh
   max-width 100%
@@ -43,9 +55,9 @@ html
   path
     stroke: #000
     opacity: 1
+    stroke-dasharray: 350
+    stroke-dashoffset: 354
     transition: opacity 1s, 
-                stroke 850ms,
-                stroke-dasharray 80ms ease, 
-                stroke-arrayoffset 80ms ease
+                stroke 850ms
                 
 

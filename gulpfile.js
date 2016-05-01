@@ -114,6 +114,9 @@ gulp.task('build:css', () => {
     .pipe(stylus({ use: [nib()] }))
     .pipe(gulp.dest('./build/stylesheets'))
     .pipe(browserSync.stream());
+
+    // browserSync.reload
+    // .pipe(browserSync.reload());
 });
 
 // Copy over images

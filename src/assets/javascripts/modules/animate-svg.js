@@ -29,18 +29,20 @@ module.exports = function() {
     })
   }
 
-  $window.on('resize', _.debounce(calculateWindowsize, 150))
+  $('.container').addClass('start-animation')  
 
-  $window.on('mousemove', function(e){
-    let targetMin = 1,
-        targetMax = 100,
-        mouseX = e.clientX,
-        mouseY = e.clientY
+  // $window.on('resize', _.debounce(calculateWindowsize, 150))
 
-    let mappedX = remap( mouseX, 0, windowX, targetMin, targetMax),
-        mappedY = remap( mouseY, 0, windowY, targetMin, targetMax)
+  // $window.on('mousemove', function(e){
+  //   let targetMin = 1,
+  //       targetMax = 100,
+  //       mouseX = e.clientX,
+  //       mouseY = e.clientY
 
-    setArrayOffset(mappedX)
-    setDashArray(mappedY)
-  })
+  //   let mappedX = remap( mouseX, 0, windowX, targetMin, targetMax),
+  //       mappedY = remap( mouseY, 0, windowY, targetMin, targetMax)
+
+  //   setArrayOffset(mappedX)
+  //   setDashArray(mappedY)
+  // })
 }
