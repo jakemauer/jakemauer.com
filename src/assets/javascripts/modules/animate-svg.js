@@ -48,6 +48,7 @@ module.exports = function() {
     this.getBoundingClientRect()
     let $this = $(this)
     $this.parents('svg').css({
+      // This is really interesting because the trailing +0 adds an extra '0' string character, essentially multiplying whatever answer by 10
       'transform': "perspective(400px) translate3d(0,0," + Math.floor(Math.random() * (200 - 0)) + 0 + "px)"
     })
   //   let length = this.getTotalLength()
