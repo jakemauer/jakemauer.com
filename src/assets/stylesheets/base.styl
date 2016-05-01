@@ -3,9 +3,24 @@
 global-reset()
 
 html
-  box-sizing border-box
+  box-sizing: border-box
 
 *
 *:before
 *:after
   box-sizing inherit
+
+.background
+    margin: 0 auto
+    height: 100vh
+    outline: 1px solid red
+    background-color: #000
+    background-image(url('/images/p.jpg'))
+    background-size: contain;
+    background-repeat: no-repeat
+    background-position: center
+
+.outlines
+  height: 100vh
+  margin: 0 auto
+  display: block
