@@ -6,12 +6,16 @@ module.exports = function() {
   let $paths  = $('.outlines path'),
       $window = $(window),
       windowX = $window.innerWidth(),
-      windowY = $window.innerHeight()
+      windowY = $window.innerHeight(),
+      longestLength = 0
 
   // $paths.each(function () {
   //   this.getBoundingClientRect()
+  //   let length = this.getTotalLength()
+  //   if (length > longestLength) { longestLength = length }
   // })
 
+  // console.log(longestLength)
   let calculateWindowsize = function(){
     windowX = $window.innerWidth()
     windowY = $window.innerHeight()
