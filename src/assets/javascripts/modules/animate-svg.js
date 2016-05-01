@@ -7,7 +7,18 @@ module.exports = function() {
       $window = $(window),
       windowX = $window.innerWidth(),
       windowY = $window.innerHeight(),
-      longestLength = 0
+      longestLength = 0,
+      fragment = document.createDocumentFragment(),
+      svgSource = $('.outlines'),
+      svgShell = svgSource.clone().empty()
+
+  $paths.each(function(){
+    fragment.appendChild(svgShell.clone().html('<g>' + this.outerHTML + '</g>')[0])
+  })
+
+
+  $('.container').append(fragment)
+  svgSource.remove()
 
   // $paths.each(function () {
   //   this.getBoundingClientRect()
@@ -33,8 +44,19 @@ module.exports = function() {
     })
   }
 
-  $('.container').addClass('start-animation')  
+  $('svg').find('path').each(function () {
+    this.getBoundingClientRect()
+    let $this = $(this)
+    $this.parents('svg').css({
+      'transform': "perspective(400px) translate3d(0,0," + Math.floor(Math.random() * (200 - 0)) + 0 + "px)"
+    })
+  //   let length = this.getTotalLength()
+  //   if (length > longestLength) { longestLength = length }
+  })
 
+  $('.container').addClass('start-animation')
+                 .on('mousedown', function(){$(this).removeClass('inactive')})
+                 .on('mouseup', function(){$(this).addClass('inactive')})
   // $window.on('resize', _.debounce(calculateWindowsize, 150))
 
   // $window.on('mousemove', function(e){

@@ -12,6 +12,11 @@ html
 
 .container
   background: #000
+  svg
+    transition: transform 180ms ease
+  &.inactive
+    svg
+      transform: perspective(400px) translate3d(0,0,0) !important
 //   &:active
 //     .background
 //       opacity: 1
@@ -33,16 +38,15 @@ html
 .start-animation
   .background
     opacity: 1
-    transition-delay: 2s
+    transition-delay: 4s
   .outlines
     path
       stroke-dasharray: 1
       stroke-dashoffset: 1
       stroke-opacity: 1
+      opacity: 1
       transition-delay: 1s
-      transition: stroke-dasharray 3.8s ease, 
-                  stroke-dashoffset 3.8s ease,
-                  stroke-opacity 1s
+
 
 
 img.svg 
@@ -58,13 +62,16 @@ img.svg
   left: 0
   right: 0
   bottom: 0
+  background: transparent
   path
     stroke: #fff
-    opacity: 1
+    opacity: 0
+    fill: none
     stroke-dasharray: 2063
-    stroke-dashoffset: 2000
-    stroke-opacity: 0
+    stroke-dashoffset: 2060
     stroke-width: 1px
     transition: opacity 1s, 
-                stroke 850ms
+                stroke 850ms,
+                stroke-dasharray 3.8s ease, 
+                stroke-dashoffset 3.8s ease
 
