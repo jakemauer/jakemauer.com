@@ -10,6 +10,14 @@ html
 *:after
   box-sizing inherit
 
+.container
+  &:active
+    .background
+      opacity: 1
+    .outlines
+      path
+        stroke: #fff
+
 .background
   height: 100vh
   background-color: #000
@@ -18,13 +26,8 @@ html
   background-repeat: no-repeat
   background-position: center
   margin: 0 auto
-  // opacity: 1
-  // transition: opacity 1s
-  // &:active
-  //   opacity: 1
-  //   .outlines
-  //     path
-  //       stroke: #fff 
+  opacity: 0
+  transition: opacity 1s
 
 
 .outlines
@@ -32,10 +35,17 @@ html
   max-width 100%
   margin: 0 auto
   display: block
-  outline: 1px solid green
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
   path
-    stroke: #fff
+    stroke: #000
     opacity: 1
     transition: opacity 1s, 
+                stroke 850ms,
                 stroke-dasharray 80ms ease, 
                 stroke-arrayoffset 80ms ease
+                
+
