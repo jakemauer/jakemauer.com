@@ -12,7 +12,14 @@ module.exports = function() {
       svgSource = $('.outlines'),
       svgShell = svgSource.clone().empty()
 
-  $paths.each(function(){
+  let rnd = function(min, max){
+    Math.floor(Math.random() * (max - min)) + min
+  }
+
+  $paths.each(function(i){
+    let length = this.getTotalLength()
+    if (length < 200) return 
+    if (rnd(0,10) > 7) return
     fragment.appendChild(svgShell.clone().html('<g>' + this.outerHTML + '</g>')[0])
   })
 
@@ -27,6 +34,8 @@ module.exports = function() {
   // })
 
   // console.log(longestLength)
+
+
   let calculateWindowsize = function(){
     windowX = $window.innerWidth()
     windowY = $window.innerHeight()
@@ -49,7 +58,7 @@ module.exports = function() {
   }).end()
   .each(function(){
     let $this = $(this)
-    let rnd = Math.floor(Math.random() * (200 - 0)) * 10
+    let rnd = Math.floor(Math.random() * (200 - 0)) * 5
     $this.css({
       'transform': "perspective(800px) translate3d(0,0," + rnd + "px)"
     }).data('randomNum', rnd)
@@ -68,7 +77,6 @@ module.exports = function() {
         mappedX = remap( mouseX, 0, windowX, targetMin, targetMax),
         mappedY = remap( mouseY, 0, windowY, targetMin, targetMax)
 
-        console.log('mousemove')
         $('svg').each(function(){
           let $this = $(this)
           $(this).css({

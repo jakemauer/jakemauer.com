@@ -13,9 +13,11 @@ html
 .container
   background: #000
   svg
+    will-change: transform
     transition: transform 500ms ease
   &.inactive
     svg
+      will-change: transform
       transform: perspective(800px) translate3d(0,0,0) !important
 //   &:active
 //     .background
@@ -41,8 +43,8 @@ html
     transition-delay: 4s
   .outlines
     path
-      stroke-dasharray: 1
-      stroke-dashoffset: 1
+      stroke-dasharray: 0
+      stroke-dashoffset: 0
       stroke-opacity: 1
       opacity: 1
       transition-delay: 1s
