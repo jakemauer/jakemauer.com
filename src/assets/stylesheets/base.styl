@@ -11,7 +11,7 @@ html
   box-sizing inherit
 
 .container
-  // background: #000
+  background: #000
 //   &:active
 //     .background
 //       opacity: 1
@@ -28,19 +28,19 @@ html
   background-position: center
   margin: 0 auto
   opacity: 0
-  transition: opacity 2s
+  transition: opacity 3s
 
 .start-animation
   .background
     opacity: 1
-    transition-delay: 5s
+    transition-delay: 2s
   .outlines
     path
       stroke-dasharray: 1
       stroke-opacity: 1
       transition-delay: 1s
-      transition: stroke-dasharray 4s ease, 
-                  stroke-arrayoffset 4s ease,
+      transition: stroke-dasharray 3.8s ease-in-out, 
+                  stroke-arrayoffset 3.8s ease-in-out,
                   stroke-opacity 1s
 
 
@@ -58,11 +58,12 @@ img.svg
   right: 0
   bottom: 0
   path
-    stroke: #000
+    stroke: #fff
     opacity: 1
     stroke-dasharray: 350
     stroke-dashoffset: 350
     stroke-opacity: 0
+    stroke-width: 1px
     transition: opacity 1s, 
                 stroke 850ms
 
