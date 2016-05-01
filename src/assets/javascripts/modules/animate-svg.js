@@ -46,30 +46,37 @@ module.exports = function() {
 
   $('svg').find('path').each(function () {
     this.getBoundingClientRect()
+  }).end()
+  .each(function(){
     let $this = $(this)
-    $this.parents('svg').css({
-      // This is really interesting because the trailing +0 adds an extra '0' string character, essentially multiplying whatever answer by 10
-      'transform': "perspective(400px) translate3d(0,0," + Math.floor(Math.random() * (200 - 0)) + 0 + "px)"
-    })
-  //   let length = this.getTotalLength()
-  //   if (length > longestLength) { longestLength = length }
+    let rnd = Math.floor(Math.random() * (200 - 0)) * 10
+    $this.css({
+      'transform': "perspective(800px) translate3d(0,0," + rnd + "px)"
+    }).data('randomNum', rnd)
   })
 
   $('.container').addClass('start-animation')
                  .on('mousedown', function(){$(this).removeClass('inactive')})
                  .on('mouseup', function(){$(this).addClass('inactive')})
-  // $window.on('resize', _.debounce(calculateWindowsize, 150))
+  
+  $window.on('resize', _.debounce(calculateWindowsize, 150))
+  $window.on('mousemove', function(e){
+    let targetMin = -50,
+        targetMax = 50,
+        mouseX = e.clientX,
+        mouseY = e.clientY,
+        mappedX = remap( mouseX, 0, windowX, targetMin, targetMax),
+        mappedY = remap( mouseY, 0, windowY, targetMin, targetMax)
 
-  // $window.on('mousemove', function(e){
-  //   let targetMin = 1,
-  //       targetMax = 100,
-  //       mouseX = e.clientX,
-  //       mouseY = e.clientY
+        console.log('mousemove')
+        $('svg').each(function(){
+          let $this = $(this)
+          $(this).css({
+            'transform': 'perspective(800px) translate3d(' + mappedX + 'px,' + mappedY + 'px,'+ $this.data('randomNum') +'px)'
+          })
+        })
 
-  //   let mappedX = remap( mouseX, 0, windowX, targetMin, targetMax),
-  //       mappedY = remap( mouseY, 0, windowY, targetMin, targetMax)
-
-  //   setArrayOffset(mappedX)
-  //   setDashArray(mappedY)
-  // })
+    // setArrayOffset(mappedX)
+    // setDashArray(mappedY)
+  })
 }
