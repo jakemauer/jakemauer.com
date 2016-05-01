@@ -11,16 +11,31 @@ html
   box-sizing inherit
 
 .background
-    margin: 0 auto
-    height: 100vh
-    outline: 1px solid red
-    background-color: #000
-    background-image(url('/images/p.jpg'))
-    background-size: contain;
-    background-repeat: no-repeat
-    background-position: center
+  height: 100vh
+  background-color: #000
+  background-image(url('/images/p.jpg'))
+  background-size: contain;
+  background-repeat: no-repeat
+  background-position: center
+  margin: 0 auto
+  // opacity: 1
+  // transition: opacity 1s
+  // &:active
+  //   opacity: 1
+  //   .outlines
+  //     path
+  //       stroke: #fff 
+
 
 .outlines
   height: 100vh
+  max-width 100%
   margin: 0 auto
   display: block
+  outline: 1px solid green
+  path
+    stroke: #fff
+    opacity: 1
+    transition: opacity 1s, 
+                stroke-dasharray 80ms ease, 
+                stroke-arrayoffset 80ms ease
