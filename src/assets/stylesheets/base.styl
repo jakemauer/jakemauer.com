@@ -12,12 +12,13 @@ html
 
 .container
   background: #000
+  overflow: hidden
+  position: relative
   svg
-    // will-change: transform
+    will-change: transform
     transition: transform 500ms cubic-bezier(0.54, 0.05, 0, 1)
   &.inactive
     svg
-      // will-change: transform
       transform: perspective(800px) translate3d(0,0,0) !important
 
 .background
@@ -60,14 +61,14 @@ img.svg
   bottom: 0
   background: transparent
   path
-    stroke: #fff
+    stroke: aqua
     opacity: 0
     fill: none
     stroke-dasharray: 2063
     stroke-dashoffset: 2060
     stroke-width: 1px
     transition: opacity 1s, 
-                stroke 850ms,
+                stroke 220ms,
                 stroke-dasharray 3.8s ease, 
                 stroke-dashoffset 3.8s ease
 
