@@ -16,9 +16,13 @@ html
 
 // Colors
 $white = #fff
+$black = #000
 $gray100 = #FAFAFA
 $gray200 = #DCDCDC
 $gray400 = #929292
+$gray700 = #616161
+  
+
 $blue = #26E0E0
 $lightblue= #85F7F7
 $green = #00FFF3
@@ -86,7 +90,7 @@ img.svg
 .complete.collapse
   .outlines
     path
-      stroke: $green !important
+      stroke: $white !important
 
 
 // ============
@@ -123,34 +127,37 @@ footer
     a
       display: block
       position: relative
-      width: 20px
+      width: 16px
       &:hover
         path, polygon, polyline
           fill: $blue
           stroke: $blue
   .mail 
     a
-      width: 24px
+      width: 19px
       top: -6px
       polyline, polygon, path, rect
-        fill: $white
-        stroke: $gray400
+        fill: $black
+        stroke: $gray700
       &:hover
         polyline, polygon, path, rect
           fill: $lightblue
           stroke: $blue
   .twitter 
+    padding-left: 1px
     a
-      width: 20px 
-      top: 3px        
+      top: 3px   
+  .linkedin
+    a
+      top: 1px     
   svg
     width: 100%
     max-width: 100%
     cursor: pointer
   path, polygon, polyline, rect
     transition: fill 220ms, stroke 220ms
-    fill: $gray200
-    stroke: $gray200
+    fill: $gray700
+    stroke: $gray700
     
 
 // START ANIMATION
