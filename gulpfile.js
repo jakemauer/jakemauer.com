@@ -210,6 +210,10 @@ gulp.task('watch', gulp.series('set:watch', 'development:build', (done) => {
     server: { baseDir: 'build' }
   });
 
+  gulp.watch('src/assets/fonts/**/*',
+    gulp.series('build:fonts')
+  );
+
   gulp.watch('src/assets/stylesheets/**/*.styl',
     gulp.series('build:css')
   );
