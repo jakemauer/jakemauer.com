@@ -214,6 +214,14 @@ gulp.task('watch', gulp.series('set:watch', 'development:build', (done) => {
     gulp.series('build:fonts')
   );
 
+  gulp.watch('src/assets/images/**/*',
+    gulp.series('build:images')
+  );
+
+  gulp.watch('src/assets/images/svg/*',
+    gulp.series('jade:development', 'reload')
+  );
+
   gulp.watch('src/assets/stylesheets/**/*.styl',
     gulp.series('build:css')
   );
