@@ -1,9 +1,9 @@
 @import './common'
-
 global-reset()
 
 @import 'fonts'
 @import 'typography'
+
 html
   box-sizing: border-box
 
@@ -12,13 +12,22 @@ html
 *:after
   box-sizing inherit
 
+
+// Colors
+$blue = #26E0E0
+$white = #FAFAFA
+$lightwhite = #DCDCDC
+
+$background-transition= 4s
+$background-transition-delay= 220ms
+
 .container
   background: #000
   overflow: hidden
   position: relative
   svg
     will-change: transform
-    transition: transform 500ms cubic-bezier(0.54, 0.05, 0, 1)
+    transition: transform 700ms cubic-bezier(0.54, 0.05, 0, 1)
   &.inactive
     svg
       transform: perspective(800px) translate3d(0,0,0) !important
@@ -26,27 +35,16 @@ html
 .background
   height: 100vh
   background-color: #000
-  background-image(url('../images/p.jpg'))
+  background-image: url('../images/p.jpg')
   background-size: contain;
   background-repeat: no-repeat
   background-position: center
   margin: 0 auto
-  opacity: 0
-  transition: opacity 3s
-
-.start-animation
-  .background
-    opacity: 1
-    transition-delay: 4s
-  .outlines
-    path
-      stroke-dasharray: 1
-      stroke-dashoffset: 1
-      stroke-opacity: 1
-      opacity: 1
-      transition-delay: 1s
-
-
+  opacity: 1
+  transition: opacity $background-transition
+  transition-delay: $background-transition-delay
+  .hide-background &
+    opacity: 0
 
 img.svg 
   display: none
@@ -63,7 +61,7 @@ img.svg
   bottom: 0
   background: transparent
   path
-    stroke: aqua
+    stroke: $blue
     opacity: 0
     fill: none
     stroke-dasharray: 2063
@@ -78,18 +76,66 @@ footer
   position: absolute
   left: calc(50% - 450px)
   bottom: 20%
-  color: #fff
+  opacity: 1
+  transition: opacity $background-transition
+  transition-delay: $background-transition-delay
   z-index: 1
   h1,h2,h3
     text-shadow: 0 2px #000
   h1
-    color: #FAFAFA
+    color: $white
     text-align: right
     margin-bottom: .3125rem
   h2
-    color: #DCDCDC
+    color: $lightwhite
+  .hide-background &
+    opacity: 0
+
+.contact
+  list-style-type: none
+  li
+    display: block
+    float: right
+    padding-left: 10px
+    a
+      display: block
+      position: relative
+      width: 20px
+      &:hover
+        path, polygon
+          fill: $blue
+  .mail 
+    a
+      width: 30px
+      top: -2px
+  .twitter 
+    a
+      width: 20px 
+      top: 3px        
+  svg
+    width: 100%
+    max-width: 100%
+    cursor: pointer
+  path, polygon
+    transition: fill 220ms 
+    fill: $lightwhite
+    
+
+// START ANIMATION
+
+.start-animation
+  .outlines
+    path
+      stroke-dasharray: 1
+      stroke-dashoffset: 1
+      stroke-opacity: 1
+      opacity: 1
+      transition-delay: 1s
 
 
+
+
+    
 @media (max-width: 1023px)
   footer
     left: calc(50% - 107px)

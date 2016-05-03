@@ -53,7 +53,7 @@ module.exports = function() {
     })
   }
 
-  $('svg').find('path').each(function () {
+  $('.outlines').find('path').each(function () {
     this.getBoundingClientRect()
   }).end()
   .each(function(){
@@ -65,7 +65,7 @@ module.exports = function() {
   })
 
   $('.container').addClass('start-animation')
-                 .on('mousedown', function(){$(this).removeClass('inactive')})
+                 .on('mousedown', function(){$(this).removeClass('inactive hide-background')})
                  .on('mouseup', function(){$(this).addClass('inactive')})
   
   $window.on('resize', _.debounce(calculateWindowsize, 150))
@@ -77,7 +77,7 @@ module.exports = function() {
         mappedX = remap( mouseX, 0, windowX, targetMin, targetMax),
         mappedY = remap( mouseY, 0, windowY, targetMin, targetMax)
 
-        $('svg').each(function(){
+        $('.outlines').each(function(){
           let $this = $(this)
           $(this).css({
             'transform': 'perspective(800px) translate3d(' + mappedX + 'px,' + mappedY + 'px,'+ $this.data('randomNum') +'px)'
