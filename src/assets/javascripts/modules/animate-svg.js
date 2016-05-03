@@ -59,16 +59,6 @@ module.exports = function() {
       }).data('randomNum', rnd)
     })
 
-  let collapse = function(){
-    $('container').addClass('collapse').removeClass('hide-background')
-  }
-
-  let collpaseTimeout
-  let collapseFallback = function(){
-    collapseTimeout = window.setTimeout(collapse, 3000)
-  }
-
-
 // ===============
 // Event Listeners
 // ===============
@@ -80,12 +70,10 @@ module.exports = function() {
       $('.container')
         .addClass('collapse')
         .on('mousedown', function(){
-          // window.clearTimeout(collapseTimeout)
           $(this).removeClass('collapse hide-background')
         })
         .on('mouseup', function(){$(this).addClass('collapse')})
       $('.outlines').off('transitionend')
-      // collapseFallback()
     }
   })
 
@@ -112,7 +100,7 @@ module.exports = function() {
   // ==================
   // Start the sequence
   // ==================
-
-  $('.container').addClass('start-animation')
+  let startAnimation = function(){$('.container').addClass('start-animation')}
+  window.setTimeout(startAnimation, 10)
 
 }
