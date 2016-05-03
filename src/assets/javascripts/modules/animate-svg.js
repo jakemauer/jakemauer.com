@@ -2,6 +2,8 @@ import $ from 'jQuery'
 import _ from 'lodash'
 import random from './random'
 import remap from './remap'
+import randomColor from 'randomcolor'
+import sheet from './stylesheet'
 
 module.exports = function() {
   let $paths  = $('.outlines path'),
@@ -40,8 +42,8 @@ module.exports = function() {
   })
 
 
-  $('.container').append(fragment)
-  svgSource.remove()
+  // $('.container').append(fragment)
+  // svgSource.remove()
 
 
 // ================
@@ -49,7 +51,11 @@ module.exports = function() {
 // ================
   $('.outlines')
     .find('path').each(function () {
-      this.getBoundingClientRect()})
+      this.getBoundingClientRect()
+      $(this).css({
+        'stroke': randomColor({luminosity: 'bright',hue: 'random'})
+      })
+    })
     .end()
     .each(function(){
       let $this = $(this)
@@ -70,7 +76,7 @@ module.exports = function() {
       $('.container')
         .addClass('collapse')
         .on('mousedown', function(){
-          $(this).removeClass('collapse hide-background')
+          $(this).removeClass('collapse hide-background').addClass('complete')
         })
         .on('mouseup', function(){$(this).addClass('collapse')})
       $('.outlines').off('transitionend')

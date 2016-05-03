@@ -22,8 +22,8 @@ $gray400 = #929292
 $blue = #26E0E0
 $lightblue= #85F7F7
 
-$background-transition= 3s
-$background-transition-delay= 220ms
+$background-transition= 1s
+$background-transition-delay= 0ms
 
 .container
   background: #000
@@ -77,9 +77,14 @@ img.svg
     stroke-dashoffset: 2060
     stroke-width: 1px
     transition: opacity 1s, 
-                stroke 220ms,
+                stroke 1020ms,
                 stroke-dasharray 3.8s ease, 
                 stroke-dashoffset 3.8s ease
+
+.complete.collapse
+  .outlines
+    path
+      stroke: #fff !important
 
 footer
   position: absolute
