@@ -1,5 +1,6 @@
 import $ from 'jQuery'
 import _ from 'lodash'
+import rnd from './random'
 import remap from './remap'
 
 module.exports = function() {
@@ -7,15 +8,30 @@ module.exports = function() {
       $window = $(window),
       windowX = $window.innerWidth(),
       windowY = $window.innerHeight(),
-      longestLength = 0,
       fragment = document.createDocumentFragment(),
       svgSource = $('.outlines'),
       svgShell = svgSource.clone().empty()
 
-  let rnd = function(min, max){
-    Math.floor(Math.random() * (max - min)) + min
+  let utilities = {
+    calculateWindowsize(){
+      windowX = $window.innerWidth()
+      windowY = $window.innerHeight()
+    },
+    setArrayOffset(value) {
+      $paths.each(function(){
+        this.setAttribute('stroke-arrayoffset', value);
+      })
+    },
+    setDashArray(value) {
+      $paths.each(function(){
+        this.setAttribute('stroke-dasharray', value)
+      })
+    }
   }
 
+// =============
+// Prepare SVGs
+// =============
   $paths.each(function(i){
     let length = this.getTotalLength()
     if (length < 200) return 
@@ -27,64 +43,76 @@ module.exports = function() {
   $('.container').append(fragment)
   svgSource.remove()
 
-  // $paths.each(function () {
-  //   this.getBoundingClientRect()
-  //   let length = this.getTotalLength()
-  //   if (length > longestLength) { longestLength = length }
-  // })
 
-  // console.log(longestLength)
-
-
-  let calculateWindowsize = function(){
-    windowX = $window.innerWidth()
-    windowY = $window.innerHeight()
-  }
-
-  let setArrayOffset = function(value) {
-    $paths.each(function(){
-      this.setAttribute('stroke-arrayoffset', value);
+// ================
+// SVG translation
+// ================
+  $('.outlines')
+    .find('path').each(function () {
+      this.getBoundingClientRect()})
+    .end()
+    .each(function(){
+      let $this = $(this)
+      $this.css({
+        'transform': "perspective(800px) translate3d(0,0," + rnd + "px)"
+      }).data('randomNum', rnd)
     })
+
+  let collapse = function(){
+    $('container').addClass('collapse').removeClass('hide-background')
   }
 
-  let setDashArray = function(value) {
-    $paths.each(function(){
-      this.setAttribute('stroke-dasharray', value)
-    })
+  let collpaseTimeout
+  let collapseFallback = function(){
+    collapseTimeout = window.setTimeout(collapse, 3000)
   }
 
-  $('.outlines').find('path').each(function () {
-    this.getBoundingClientRect()
-  }).end()
-  .each(function(){
-    let $this = $(this)
-    let rnd = Math.floor(Math.random() * (200 - 0)) * 5
-    $this.css({
-      'transform': "perspective(800px) translate3d(0,0," + rnd + "px)"
-    }).data('randomNum', rnd)
+
+// ===============
+// Event Listeners
+// ===============
+
+// == Collapse SVGs onto face
+  let transitionEndCount = 0
+  $('.outlines').first().on('transitionend', function(){
+    transitionEndCount++
+    if (transitionEndCount >= 4) {
+      $('.container')
+        .addClass('collapse')
+        .on('mousedown', function(){
+          window.clearTimeout(collapseTimeout)
+          $(this).removeClass('collapse hide-background')
+        })
+        .on('mouseup', function(){$(this).addClass('collapse')})
+      $('.outlines').off('transitionend')
+      collapseFallback()
+    }
   })
+
+  $window
+    .on('resize', _.debounce(utilities.calculateWindowsize, 150))
+    .on('mousemove', function(e){
+      let targetMin = -50,
+          targetMax = 50,
+          mouseX = e.clientX,
+          mouseY = e.clientY,
+          mappedX = remap( mouseX, 0, windowX, targetMin, targetMax),
+          mappedY = remap( mouseY, 0, windowY, targetMin, targetMax)
+
+      $('.outlines').each(function(){
+        let $this = $(this)
+        $(this).css({
+          'transform': 'perspective(800px) translate3d(' + mappedX + 'px,' + mappedY + 'px,'+ $this.data('randomNum') +'px)'
+        })
+      })
+    })
+
+
+
+  // ==================
+  // Start the sequence
+  // ==================
 
   $('.container').addClass('start-animation')
-                 .on('mousedown', function(){$(this).removeClass('inactive hide-background')})
-                 .on('mouseup', function(){$(this).addClass('inactive')})
-  
-  $window.on('resize', _.debounce(calculateWindowsize, 150))
-  $window.on('mousemove', function(e){
-    let targetMin = -50,
-        targetMax = 50,
-        mouseX = e.clientX,
-        mouseY = e.clientY,
-        mappedX = remap( mouseX, 0, windowX, targetMin, targetMax),
-        mappedY = remap( mouseY, 0, windowY, targetMin, targetMax)
 
-        $('.outlines').each(function(){
-          let $this = $(this)
-          $(this).css({
-            'transform': 'perspective(800px) translate3d(' + mappedX + 'px,' + mappedY + 'px,'+ $this.data('randomNum') +'px)'
-          })
-        })
-
-    // setArrayOffset(mappedX)
-    // setDashArray(mappedY)
-  })
 }

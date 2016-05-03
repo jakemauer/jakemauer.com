@@ -17,6 +17,7 @@ html
 $white = #fff
 $gray100 = #FAFAFA
 $gray200 = #DCDCDC
+$gray400 = #929292
 $blue = #26E0E0
 $lightblue= #85F7F7
 
@@ -27,12 +28,16 @@ $background-transition-delay= 220ms
   background: #000
   overflow: hidden
   position: relative
-  svg
+  .outlines
     will-change: transform
     transition: transform 700ms cubic-bezier(0.54, 0.05, 0, 1)
-  &.inactive
-    svg
+  &.collapse
+    .outlines
       transform: perspective(800px) translate3d(0,0,0) !important
+
+.hide-background 
+  .outlines
+    cursor: pointer
 
 .background
   height: 100vh
@@ -47,6 +52,7 @@ $background-transition-delay= 220ms
   transition-delay: $background-transition-delay
   .hide-background &
     opacity: 0
+
 
 img.svg 
   display: none
@@ -113,7 +119,7 @@ footer
       top: -6px
       polyline, polygon, path, rect
         fill: $white
-        stroke: $gray200
+        stroke: $gray400
       &:hover
         polyline, polygon, path, rect
           fill: $lightblue
