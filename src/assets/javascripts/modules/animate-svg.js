@@ -1,6 +1,6 @@
 import $ from 'jQuery'
 import _ from 'lodash'
-import rnd from './random'
+import random from './random'
 import remap from './remap'
 
 module.exports = function() {
@@ -35,7 +35,7 @@ module.exports = function() {
   $paths.each(function(i){
     let length = this.getTotalLength()
     if (length < 200) return 
-    if (rnd(0,10) > 7) return
+    if (random(0,10) > 7) return
     fragment.appendChild(svgShell.clone().html('<g>' + this.outerHTML + '</g>')[0])
   })
 
@@ -53,6 +53,7 @@ module.exports = function() {
     .end()
     .each(function(){
       let $this = $(this)
+      let rnd = random(0, 200) * 5
       $this.css({
         'transform': "perspective(800px) translate3d(0,0," + rnd + "px)"
       }).data('randomNum', rnd)
@@ -71,7 +72,6 @@ module.exports = function() {
 // ===============
 // Event Listeners
 // ===============
-
 // == Collapse SVGs onto face
   let transitionEndCount = 0
   $('.outlines').first().on('transitionend', function(){
@@ -80,12 +80,12 @@ module.exports = function() {
       $('.container')
         .addClass('collapse')
         .on('mousedown', function(){
-          window.clearTimeout(collapseTimeout)
+          // window.clearTimeout(collapseTimeout)
           $(this).removeClass('collapse hide-background')
         })
         .on('mouseup', function(){$(this).addClass('collapse')})
       $('.outlines').off('transitionend')
-      collapseFallback()
+      // collapseFallback()
     }
   })
 

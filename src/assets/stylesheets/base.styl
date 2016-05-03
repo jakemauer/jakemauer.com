@@ -21,7 +21,7 @@ $gray400 = #929292
 $blue = #26E0E0
 $lightblue= #85F7F7
 
-$background-transition= 4s
+$background-transition= 3s
 $background-transition-delay= 220ms
 
 .container
@@ -30,12 +30,12 @@ $background-transition-delay= 220ms
   position: relative
   .outlines
     will-change: transform
-    transition: transform 700ms cubic-bezier(0.54, 0.05, 0, 1)
+    transition: transform 1000ms cubic-bezier(0.54, 0.05, 0, 1)
   &.collapse
     .outlines
       transform: perspective(800px) translate3d(0,0,0) !important
 
-.hide-background 
+.hide-background.collapse 
   .outlines
     cursor: pointer
 
@@ -98,6 +98,8 @@ footer
     color: $gray200
   .hide-background &
     opacity: 0
+  .collapse &
+    opacity: 1
 
 .contact
   list-style-type: none
