@@ -125,6 +125,12 @@ gulp.task('build:images', () => {
     .pipe(gulp.dest('build/images'));
 });
 
+// Copy over fonts
+gulp.task('build:fonts', () => {
+  return gulp.src('src/assets/fonts/**/*')
+    .pipe(gulp.dest('build/fonts'));
+});
+
 // Minify JavaScript
 gulp.task('compress:js', () => {
   return gulp.src('build/javascripts/*.js')
@@ -167,7 +173,8 @@ gulp.task('development:build',
       'jade:development',
       'build:js',
       'build:css',
-      'build:images'
+      'build:images',
+      'build:fonts'
     )
   )
 );
@@ -177,7 +184,8 @@ gulp.task('production:build',
     gulp.parallel(
       'build:js',
       'build:css',
-      'build:images'
+      'build:images',
+      'build:fonts'
     ),
     gulp.parallel(
       'compress:js',
