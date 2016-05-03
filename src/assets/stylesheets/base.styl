@@ -21,6 +21,8 @@ $gray200 = #DCDCDC
 $gray400 = #929292
 $blue = #26E0E0
 $lightblue= #85F7F7
+$green = #00FFF3
+$lightgreen = #A4FFFB
 
 $background-transition= 1s
 $background-transition-delay= 0ms
@@ -36,7 +38,7 @@ $background-transition-delay= 0ms
     .outlines
       transform: perspective(800px) translate3d(0,0,0) !important
 
-.hide-background.collapse 
+.complete
   .outlines
     cursor: pointer
 
@@ -84,7 +86,12 @@ img.svg
 .complete.collapse
   .outlines
     path
-      stroke: #fff !important
+      stroke: $green !important
+
+
+// ============
+// Footer block
+// ============
 
 footer
   position: absolute

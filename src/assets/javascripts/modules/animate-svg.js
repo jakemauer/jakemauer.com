@@ -42,8 +42,8 @@ module.exports = function() {
   })
 
 
-  // $('.container').append(fragment)
-  // svgSource.remove()
+  $('.container').append(fragment)
+  svgSource.remove()
 
 
 // ================
