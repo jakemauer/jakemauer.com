@@ -44,7 +44,7 @@ let locals = () => {
 };
 
 gulp.task('jade:development', () => {
-  return gulp.src('src/html/index.jade')
+  return gulp.src('src/html/*.jade')
     .pipe(jade({
       locals: Object.assign(
         { assetPath: assetPath({}) },
@@ -56,7 +56,7 @@ gulp.task('jade:development', () => {
 
 gulp.task('jade:production', () => {
   let manifest = JSON.parse(fs.readFileSync('build/rev-manifest.json', 'utf8'));
-  return gulp.src('src/html/index.jade')
+  return gulp.src('src/html/*.jade')
     .pipe(jade({
       locals: Object.assign(
         { assetPath: assetPath(manifest) },
